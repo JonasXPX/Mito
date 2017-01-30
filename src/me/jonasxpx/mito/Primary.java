@@ -1,15 +1,15 @@
 package me.jonasxpx.mito;
 
-import me.jonasxpx.mito.commands.SetMito;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import me.jonasxpx.mito.commands.SetMito;
 /**
  * 
  * @author Jonas de Farias Peretiako
@@ -21,6 +21,7 @@ public class Primary extends JavaPlugin{
 	public Mito mito;
 	protected static Primary instance;
 	private Map<String, List<String>> msg = null;
+	public static boolean isEnabledCitizens = false;
 	
 	@Override
 	public void onEnable() {
@@ -29,6 +30,10 @@ public class Primary extends JavaPlugin{
 		getCommand("mito").setExecutor(new me.jonasxpx.mito.commands.Mito(this));
 		getCommand("setmito").setExecutor(new SetMito(this));
 		getServer().getPluginManager().registerEvents(new JoinListener(this), this);
+		if(getServer().getPluginManager().getPlugin("Citizens") != null){
+			isEnabledCitizens = true;
+			getLogger().log(Level.INFO, "Citizens hooked!");
+		}
 		instance = this;
 	}
 	

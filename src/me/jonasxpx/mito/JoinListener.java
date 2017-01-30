@@ -41,16 +41,15 @@ public class JoinListener implements Listener{
 	public void playerLoginEvent(PlayerJoinEvent e){
 		if(p.mito.getMito() != null){
 			if(p.mito.getSecondsFromTheLastLogin() > 43200){
-				for(String line : Messages.INACTIVE.getArray()){
-					Bukkit.broadcastMessage(line.replaceAll("@player", p.mito.getMito()));
-				}
+				Messages.INACTIVE.getArray().forEach(msg -> 
+					Bukkit.broadcastMessage(msg.replaceAll("@player", p.mito.getMito())));
+			
 				p.mito.setMito(null, true);
 			}
 			if(e.getPlayer().getName().equalsIgnoreCase(p.mito.getMito())){
 				if(p.mito.hasNotification()){
-					for(String line : Messages.LOGIN.getArray()){
-						Bukkit.broadcastMessage(line.replaceAll("@player", e.getPlayer().getName()));
-					}
+					Messages.LOGIN.getArray().forEach(msg -> 
+						Bukkit.broadcastMessage(msg.replaceAll("@player", e.getPlayer().getName())));
 				}
 				antiburle =	new BukkitRunnable() {
 					@Override

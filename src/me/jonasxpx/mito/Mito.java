@@ -1,7 +1,5 @@
 package me.jonasxpx.mito;
 
-import java.io.BufferedReader;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -44,9 +42,8 @@ public class Mito {
 			setMitoString(player == null ? null : player.getName());
 			updateLastLogin();
 			if(!quiet){
-				for(String line : Messages.CATCHED.getArray()){
-					Bukkit.broadcastMessage(line.replaceAll("@player", player.getName()));
-				}
+				Messages.CATCHED.getArray().forEach(msg -> 
+					Bukkit.broadcastMessage(msg.replaceAll("@player", player.getName())));
 				Location loc = player.getLocation();
 				loc.getWorld().strikeLightningEffect(player.getLocation().add(2, 0, 0));
 				loc.getWorld().strikeLightningEffect(player.getLocation().add(-2, 0, 0));
@@ -58,7 +55,8 @@ public class Mito {
 					players.playSound(players.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
 				}
 			}
-			if(player != null)updateSkin(player.getName());
+			if(player != null && Primary.isEnabledCitizens)
+				updateSkin(player.getName());
 	}
 	
 	public void setMito(OfflinePlayer player, boolean quiet){
@@ -67,14 +65,15 @@ public class Mito {
 		setMitoString(player == null ? null : player.getName());
 		updateLastLogin();
 		if(!quiet){
-			for(String line : Messages.CATCHED.getArray()){
-				Bukkit.broadcastMessage(line.replaceAll("@player", player.getName()));
-			}
+			Messages.CATCHED.getArray().forEach(msg -> 
+				Bukkit.broadcastMessage(msg.replaceAll("@player", player.getName())));
+			
 			for(Player players : jp.getServer().getOnlinePlayers()){
 				players.playSound(players.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
 			}
 		}
-		if(player != null)updateSkin(player.getName());
+		if(player != null && Primary.isEnabledCitizens)
+			updateSkin(player.getName());
 }
 	
 	public void updateLastLogin(){
@@ -125,15 +124,4 @@ public class Mito {
 		}
 		player.addPotionEffect(new PotionEffect(ef, dura * 20, ampl));
 	}
-	
-	public static void main(String[] args) {
-		int levelPo = 1500;
-		int xp = 5;
-		int nivel = 0;
-		int multiplicador = 1;
-		System.out.println(nivel + " / " + levelPo);
-		
-	}
-	
-	
 }
