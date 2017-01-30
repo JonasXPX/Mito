@@ -1,5 +1,6 @@
 package me.jonasxpx.mito;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -14,6 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import br.com.devpaulo.legendchat.api.events.ChatMessageEvent;
+import me.jonasxpx.mito.Primary.Messages;
 import me.jonasxpx.mito.eventos.PlayerLosesMitoEvent;
 
 public class JoinListener implements Listener{
@@ -39,11 +41,17 @@ public class JoinListener implements Listener{
 	public void playerLoginEvent(PlayerJoinEvent e){
 		if(p.mito.getMito() != null){
 			if(p.mito.getSecondsFromTheLastLogin() > 43200){
-				p.getServer().broadcastMessage("\n§5§l" + p.mito.getMito() + " perdeu a MITO devido a inatividade.");
+				for(String line : Messages.INACTIVE.getArray()){
+					Bukkit.broadcastMessage(line.replaceAll("@player", p.mito.getMito()));
+				}
 				p.mito.setMito(null, true);
 			}
 			if(e.getPlayer().getName().equalsIgnoreCase(p.mito.getMito())){
-				if(p.mito.hasNotification())p.getServer().broadcastMessage("\n§5[MITO DO PVP] §c"+ p.mito.getMito() + " logou no EndCraft!.\n ");
+				if(p.mito.hasNotification()){
+					for(String line : Messages.LOGIN.getArray()){
+						Bukkit.broadcastMessage(line.replaceAll("@player", e.getPlayer().getName()));
+					}
+				}
 				antiburle =	new BukkitRunnable() {
 					@Override
 					public void run() {
@@ -70,8 +78,7 @@ public class JoinListener implements Listener{
 			if(e.getEntity().getKiller() != null && e.getEntity().getKiller().getName().equalsIgnoreCase(p.mito.getMito())){
 				me.jonasxpx.mito.commands.Mito.contagem2++;
 			}
-		}else
-			System.out.println("[Mito Plugin]is null");
+		}
 	}
 	@EventHandler
 	public void playerHit(EntityDamageByEntityEvent e){

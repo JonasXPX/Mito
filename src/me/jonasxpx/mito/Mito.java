@@ -1,5 +1,7 @@
 package me.jonasxpx.mito;
 
+import java.io.BufferedReader;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -9,9 +11,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import me.jonasxpx.mito.Primary.Messages;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.DespawnReason;
-import net.citizensnpcs.api.npc.AbstractNPC;
 import net.citizensnpcs.api.npc.NPC;
 
 
@@ -42,10 +44,9 @@ public class Mito {
 			setMitoString(player == null ? null : player.getName());
 			updateLastLogin();
 			if(!quiet){
-				Bukkit.broadcastMessage("\n"
-						+ "\n"
-						+ "§5[MITO] §c" + player.getName() + " é o novo MITO do PVP!\n"
-								+ "\n ");
+				for(String line : Messages.CATCHED.getArray()){
+					Bukkit.broadcastMessage(line.replaceAll("@player", player.getName()));
+				}
 				Location loc = player.getLocation();
 				loc.getWorld().strikeLightningEffect(player.getLocation().add(2, 0, 0));
 				loc.getWorld().strikeLightningEffect(player.getLocation().add(-2, 0, 0));
@@ -66,10 +67,9 @@ public class Mito {
 		setMitoString(player == null ? null : player.getName());
 		updateLastLogin();
 		if(!quiet){
-			Bukkit.broadcastMessage("\n"
-					+ "\n"
-					+ "§5[MITO] §c" + player.getName() + " é o novo MITO do PVP!\n"
-							+ "\n ");
+			for(String line : Messages.CATCHED.getArray()){
+				Bukkit.broadcastMessage(line.replaceAll("@player", player.getName()));
+			}
 			for(Player players : jp.getServer().getOnlinePlayers()){
 				players.playSound(players.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);
 			}
