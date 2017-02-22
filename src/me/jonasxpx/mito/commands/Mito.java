@@ -55,8 +55,8 @@ public class Mito implements CommandExecutor{
 				sender.sendMessage("§4Você não pode ir mais a área mito até o servidor reiniciar");
 				return true;
 			}
-			if(contagem2 < 10){
-				sender.sendMessage("§cVocê precisa matar mais " + (10 - contagem2) + " jogador(es) para ir até a área MITO.");
+			if(contagem2 < 20){
+				sender.sendMessage("§cVocê precisa matar mais " + (20 - contagem2) + " jogador(es) para ir até a área MITO.");
 				return true;
 			}
 			contagem--;

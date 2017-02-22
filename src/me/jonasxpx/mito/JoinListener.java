@@ -91,8 +91,8 @@ public class JoinListener implements Listener{
 			return;
 		}
 		if(((Player)e.getDamager()).getName().equalsIgnoreCase(p.mito.getMito())){
-			Mito.addEffects(((Player)e.getDamager()), PotionEffectType.SPEED, 10, 1);
-			Mito.addEffects(((Player)e.getDamager()), PotionEffectType.INCREASE_DAMAGE, 10, 1);
+			Mito.addEffects(((Player)e.getDamager()), PotionEffectType.SPEED, 120, 1);
+			Mito.addEffects(((Player)e.getDamager()), PotionEffectType.INCREASE_DAMAGE, 120, 1);
 		}
 	}
 	@EventHandler

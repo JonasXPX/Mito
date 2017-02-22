@@ -1,6 +1,6 @@
 name: Mito
 main: me.jonasxpx.mito.Primary
-version: 0.1a
+version: 0.2a
 commands:
     setmito:
     mito:
