@@ -1,6 +1,7 @@
 package me.jonasxpx.mito;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
@@ -43,7 +44,7 @@ public class Mito {
 			updateLastLogin();
 			if(!quiet){
 				Messages.CATCHED.getArray().forEach(msg -> 
-					Bukkit.broadcastMessage(msg.replaceAll("@player", player.getName())));
+					Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', msg.replaceAll("@player", player.getName()))));
 				Location loc = player.getLocation();
 				loc.getWorld().strikeLightningEffect(player.getLocation().add(2, 0, 0));
 				loc.getWorld().strikeLightningEffect(player.getLocation().add(-2, 0, 0));
@@ -66,7 +67,7 @@ public class Mito {
 		updateLastLogin();
 		if(!quiet){
 			Messages.CATCHED.getArray().forEach(msg -> 
-				Bukkit.broadcastMessage(msg.replaceAll("@player", player.getName())));
+				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', msg.replaceAll("@player", player.getName()))));
 			
 			for(Player players : jp.getServer().getOnlinePlayers()){
 				players.playSound(players.getLocation(), Sound.ENDERDRAGON_GROWL, 1, 1);

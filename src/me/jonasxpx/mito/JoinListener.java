@@ -1,6 +1,7 @@
 package me.jonasxpx.mito;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -42,14 +43,14 @@ public class JoinListener implements Listener{
 		if(p.mito.getMito() != null){
 			if(p.mito.getSecondsFromTheLastLogin() > 43200){
 				Messages.INACTIVE.getArray().forEach(msg -> 
-					Bukkit.broadcastMessage(msg.replaceAll("@player", p.mito.getMito())));
+					Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', msg.replaceAll("@player", p.mito.getMito()))));
 			
 				p.mito.setMito(null, true);
 			}
 			if(e.getPlayer().getName().equalsIgnoreCase(p.mito.getMito())){
 				if(p.mito.hasNotification()){
 					Messages.LOGIN.getArray().forEach(msg -> 
-						Bukkit.broadcastMessage(msg.replaceAll("@player", e.getPlayer().getName())));
+						Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', msg.replaceAll("@player", e.getPlayer().getName()))));
 				}
 				antiburle =	new BukkitRunnable() {
 					@Override
